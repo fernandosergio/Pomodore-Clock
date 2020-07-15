@@ -3,8 +3,8 @@ var trab = window.document.getElementById('trabalho')
 var des = window.document.getElementById('descanso')
 var pause = window.document.getElementById('play')
 var parar = window.document.getElementById('para')
-let tempo = 10
-let desmin = 10
+let tempo = 1500
+let desmin = 300
 var cont = false
 var cond = false
 var verifica = 0
@@ -38,7 +38,7 @@ function conta() {
             audio.play()
             document.getElementById('relogio').style.background = '#cecece'
             document.getElementById('relogio2').style.background = '#5ef08ee0'
-            desmin = 10
+            desmin = 300
             cont = false
             cond = true
             contades()
@@ -69,7 +69,7 @@ function contades() {
             audio.play()
             document.getElementById('relogio').style.backgroundColor = '#5ef08ee0'
             document.getElementById('relogio2').style.backgroundColor = '#cecece'
-            tempo = 10
+            tempo = 1500
             cont = true
             cond = false
             conta()
