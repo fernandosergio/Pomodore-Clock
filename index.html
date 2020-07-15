@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relógio de Pomodoro</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <section>
+
+        <header>
+            <h1>Relógio de Pomodoro</h1>
+        </header>
+
+        <!-- <div id="opcoes"> bonus features
+            <button></button>
+        </div> -->
+
+        <div class="relogio" id="relogio">
+            <h2>Trabalho</h2>
+            <p id="trabalho">25:00</p>
+        </div>
+
+        <div class="relogio2" id="relogio2">
+            <h2>Descanso</h2>
+            <p id="descanso">0:00</p>
+        </div>
+
+        <div class="botao">
+            <button onclick="chama()" id="play"><i class="fa fa-play" aria-hidden="true"></i> Play</button>
+            <button onclick="para()" id="para" disabled><i class="fa fa-pause" aria-hidden="true"></i> Pause</button>
+
+            <button onclick="reinicia()"><i class="fa fa-undo" aria-hidden="true"></i> Reset</button>
+        </div>
+    </section>
+    <footer>
+        by Fernando Sergio
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
