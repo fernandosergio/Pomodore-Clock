@@ -52,9 +52,10 @@ function conta(tempo, contador) {
             audio.play()
             trocaCont()
         }
-    } else {
-        console.log('Deu erro no conta()') // caso nenhum requisito foi atendido
     }
+    /*else {
+           console.log('Deu erro no conta() ou foi pausado') // caso nenhum requisito foi atendido
+       }*/
 }
 
 // Função que verifica os valores, troca os contadores e os valores
@@ -75,9 +76,10 @@ function trocaCont() {
         conta(inpTrab, trab) // caso o contador esteja no descanso e o valor de descanso foi definido
         document.getElementById('relogio').style.background = '#5ef08ee0'
         document.getElementById('relogio2').style.background = '#cecece'
-    } else {
-        console.log('Faltou alguma/Deu erro no trocaCont()') // caso nenhum requisito foi atendido
     }
+    /*else {
+           console.log('Faltou alguma/Deu erro no trocaCont()') // caso nenhum requisito foi atendido
+       }*/
 }
 
 // valores do descanso e trabalho
@@ -107,9 +109,10 @@ function tocar() {
         inpTrab = altera(inpTrabSem)
         inpDes = altera(inpDesSem)
         conta(inpTrab, trab) // caso os dois valores sejam alterados
-    } else {
-        console.log('Deu erro no tocar()') // caso nenhum requisito foi atendido
     }
+    /*else {
+           console.log('Deu erro no tocar()') // caso nenhum requisito foi atendido
+       }*/
 
     // Ativa o botão pause, desativa o botão play e os inputs
     bottocar.disabled = true
@@ -164,9 +167,10 @@ function para() {
         inpDes = altera(inpDesSem)
         trab.innerHTML = inpTrabSem
         des.innerHTML = inpDesSem
-    } else {
-        console.log('Deu erro no reinicia()') // caso nenhum requisito foi atendido
     }
+    /* else {
+           console.log('Deu erro no reinicia()') // caso nenhum requisito foi atendido
+       }*/
 
 }
 
