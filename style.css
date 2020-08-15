@@ -5,7 +5,9 @@
 
 body {
     min-width: 40.1em;
-    font: normal 15pt Arial;
+    font-size: 15pt;
+    font-family: 'Abel', sans-serif;
+    font: normal 15pt 'Abel';
     background-color: rgba(228, 198, 198, 0.74);
 }
 
@@ -41,23 +43,30 @@ header {
     margin-left: auto;
 }
 
-h2 {
-    font: normal 18pt Arial;
-    font-family: 'Abel', sans-serif;
+.text-title {
+    font: normal 18pt 'Abel';
     margin-bottom: 1.3em;
     margin-top: .3em;
     border-bottom: 1px solid black;
 }
 
-p {
+#trabalho,
+#descanso {
     margin-top: 0;
-    font-size: 60pt;
-    font-family: 'Abel', sans-serif;
+    font: normal 60pt 'Abel';
     display: inline-block;
 }
 
-.botao {
-    padding: 5px;
+button {
+    width: 10rem;
+    padding: 0.4rem;
+    border-radius: 0.4rem;
+    margin: 0.3rem;
+}
+
+.text-button {
+    font: normal 13pt 'Abel';
+    margin: 0.7rem;
 }
 
 footer {
