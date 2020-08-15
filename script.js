@@ -1,11 +1,11 @@
-// elementos e arquivos utilizados
+// Arquivos utilizados
 var audio = new Audio('done-for-you.mp3')
 
 // Cronômetros
 var trab = window.document.getElementById('trabalho')
 var des = window.document.getElementById('descanso')
 
-// Botões para alterar o <button disabled>
+// Botões
 var bottocar = window.document.getElementById('botplay')
 var botpause = window.document.getElementById('botpausar')
 
@@ -18,19 +18,23 @@ let conte = des
 let tempofora = 5000
 let verificador = false
 
-//função que conta o tempo de trabalho
+// Valores do descanso e trabalho
+let inpDes = ''
+let inpTrab = ''
+
+// Função que conta o tempo dos cronometros
 function conta(tempo, contador) {
 
     // "Iniciador" da função
     if (verificador) {
 
-        // verficia se tem tempo
+        // Verficia se tem tempo
         if (tempo >= 0) {
-            //divide o tempo entre minutos e segundos
+            // Divide o tempo entre minutos e segundos
             var min = parseInt(tempo / 60)
             var seg = tempo % 60
 
-            // se for menor do que 10 adiciona um 0 antes ex 09
+            // Se for menor do que 10 adiciona um 0 antes ex 09
             if (min < 10) {
                 min = "0" + min
             }
@@ -38,115 +42,94 @@ function conta(tempo, contador) {
                 seg = "0" + seg
             }
 
-            // formata o tempo
+            // Formata o tempo
             tempoimprimivel = min + ":" + seg
             contador.innerHTML = tempoimprimivel
-            tempo-- // diminui 1 
-            tempofora = tempo // define o tempo da variavel local para global
-            conte = contador // define o contador atual da varivel local para global
-            setTimeout('conta(tempofora, conte)', 1000) //espera o tempo
+            tempo-- // Diminui 1 
+            tempofora = tempo // Define o tempo da variavel local para global
+            conte = contador // Define o contador atual da varivel local para global
+            setTimeout('conta(tempofora, conte)', 1000) // Espera o tempo
 
         } else {
 
-            // quando acaba o tempo toca o audio e troca o contador
+            // Quando acaba o tempo toca o audio e troca o contador
             audio.play()
             trocaCont()
         }
     }
     /*else {
-           console.log('Deu erro no conta() ou foi pausado') // caso nenhum requisito foi atendido
+           console.log('Deu erro no conta() ou foi pausado') // Caso nenhum requisito foi atendido
        }*/
 }
 
 // Função que verifica os valores, troca os contadores e os valores
 function trocaCont() {
     if (conte == trab && inpDesSem == '') {
-        conta(300, des) // caso o contador esteja no trabalho e não foi definido o descanso
-        document.getElementById('relogio').style.background = '#cecece'
-        document.getElementById('relogio2').style.background = '#5ef08ee0'
+        conta(300, des) // Caso o contador esteja no trabalho e não foi definido o descanso
+        eventos('desAtivado')
     } else if (conte == trab) {
-        conta(inpDes, des) // caso o contador esteja no trabalho e o valor de descanso foi definido
-        document.getElementById('relogio').style.background = '#cecece'
-        document.getElementById('relogio2').style.background = '#5ef08ee0'
+        conta(inpDes, des) // Caso o contador esteja no trabalho e o valor de descanso foi definido
+        eventos('desAtivado')
     } else if (conte == des && inpTrabSem == '') {
-        conta(1500, trab) // caso o contador esteja no descanso e o valor do trabalho não foi definido
-        document.getElementById('relogio').style.background = '#5ef08ee0'
-        document.getElementById('relogio2').style.background = '#cecece'
+        conta(1500, trab) // Caso o contador esteja no descanso e o valor do trabalho não foi definido
+        eventos('trabAtivado')
     } else if (conte == des) {
-        conta(inpTrab, trab) // caso o contador esteja no descanso e o valor de descanso foi definido
-        document.getElementById('relogio').style.background = '#5ef08ee0'
-        document.getElementById('relogio2').style.background = '#cecece'
+        conta(inpTrab, trab) // Caso o contador esteja no descanso e o valor de descanso foi definido
+        eventos('trabAtivado')
     }
     /*else {
-           console.log('Faltou alguma/Deu erro no trocaCont()') // caso nenhum requisito foi atendido
+           console.log('Deu erro no trocaCont()') // Caso nenhum requisito foi atendido
        }*/
 }
 
-// valores do descanso e trabalho
-let inpDes = ''
-let inpTrab = ''
-
-// inicia a função conta() ao clicar em play
+// Inicia a função conta() ao clicar em play
 function tocar() {
 
-    // "inicia" a função conta()
+    // continua a função conta()
     verificador = true
 
-    // verfica se foi pausado, se os inputs foram setados e 
+    // Verfica se foi pausado e se os inputs foram setados 
     if (conte == trab && tempofora != 5000) {
-        conta(tempofora, trab) // caso o contador foi pausado e estava contando no trabalho
+        conta(tempofora, trab) // Caso o contador foi pausado e estava contando no trabalho
     } else if (conte == des && tempofora != 5000) {
-        conta(tempofora, des) // caso o contador foi pausado e estava no descanso
+        conta(tempofora, des) // Caso o contador foi pausado e estava no descanso
     } else if (inpDesSem == '' && inpTrabSem == '') {
-        conta(1500, trab) // vai iniciar a primeira vez caso esteja vazio
+        conta(1500, trab) // Vai iniciar a primeira vez caso esteja vazio
     } else if (inpTrabSem == '' && inpDesSem != '') {
         inpDes = altera(inpDesSem)
-        conta(1500, trab) // caso o valor do descanso seja alterado
+        conta(1500, trab) // Caso o valor do descanso seja alterado
     } else if (inpTrabSem != '' && inpDesSem == '') {
         inpTrab = altera(inpTrabSem)
-        conta(inpTrab, trab) // caso o valor de trabalho seja alterado
+        conta(inpTrab, trab) // Caso o valor de trabalho seja alterado
     } else if (inpTrabSem != '' && inpDesSem != '') {
         inpTrab = altera(inpTrabSem)
         inpDes = altera(inpDesSem)
-        conta(inpTrab, trab) // caso os dois valores sejam alterados
+        conta(inpTrab, trab) // Caso os dois valores sejam alterados
     }
     /*else {
-           console.log('Deu erro no tocar()') // caso nenhum requisito foi atendido
+           console.log('Deu erro no tocar()') // Caso nenhum requisito foi atendido
        }*/
 
-    // Ativa o botão pause, desativa o botão play e os inputs
-    bottocar.disabled = true
-    botpausar.disabled = false
-    window.document.getElementById('inpTrab').disabled = true
-    window.document.getElementById('inpDes').disabled = true
-
+    eventos('clicaPlay')
 }
 
-// função do botão pause
+// Função do botão pause
 function pausar() {
 
-    // desativa o botão pause, ativa o botão play e os inputs
-    bottocar.disabled = false
-    botpausar.disabled = true
     verificador = false
-    window.document.getElementById('inpTrab').disabled = false
-    window.document.getElementById('inpDes').disabled = false
+    eventos('clicaPause')
 }
 
-// função do botão stop
+// Função do botão stop
 function para() {
 
-    // redefine os valores, o estados dos botoes e inputs e a cor dos contadores
+    // Redefine os valores 
     tempofora = 5000
     verificador = false
-    bottocar.disabled = false
-    botpausar.disabled = true
-    window.document.getElementById('inpTrab').disabled = false
-    window.document.getElementById('inpDes').disabled = false
-    document.getElementById('relogio').style.background = '#5ef08ee0'
-    document.getElementById('relogio2').style.background = '#cecece'
+    eventos('clicaPause')
+    eventos('trabAtivado')
 
-    // verifica se os valores foram definidos, seta os valores e o html
+    // Verifica se os valores foram definidos, seta os valores e o html
     if (inpDesSem == '' && inpTrabSem == '') {
         inpTrab = 1500
         inpDes = 300
@@ -169,15 +152,15 @@ function para() {
         des.innerHTML = inpDesSem
     }
     /* else {
-           console.log('Deu erro no reinicia()') // caso nenhum requisito foi atendido
+           console.log('Deu erro no reinicia()') // Caso nenhum requisito foi atendido
        }*/
 
 }
 
-// reinicia o contador
+// Reinicia o contador
 function reinicia() {
 
-    // redefine os valores, o html dos contadores, o estado dos botoes e inputs e a cor dos contadores
+    // Redefine os valores e o html dos contadores
     verificador = false
     tempofora = 5000
     trab.innerHTML = '25:00'
@@ -186,23 +169,19 @@ function reinicia() {
     inpTrabSem = ''
     window.document.getElementById('inpDes').value = ''
     window.document.getElementById('inpTrab').value = ''
-    document.getElementById('relogio').style.background = '#5ef08ee0'
-    document.getElementById('relogio2').style.background = '#cecece'
-    bottocar.disabled = false
-    botpausar.disabled = true
-    window.document.getElementById('inpTrab').disabled = false
-    window.document.getElementById('inpDes').disabled = false
+    eventos('trabAtivado')
+    eventos('clicaPause')
 }
 
-// muda o valor do inpTrab e inpDes, atraves do form dinamicamente
+// Muda o valor do inpTrab e inpDes, atraves do form dinamicamente
 function muda() {
 
-    // pega os valores dos inputs e redefine o tempofora
+    // Pega os valores dos inputs e redefine o tempofora
     inpTrabSem = window.document.getElementById('inpTrab').value
     inpDesSem = window.document.getElementById('inpDes').value
     tempofora = 5000
 
-    // verifica os valores digitados, muda o texto html e a cor dos contadores
+    // Verifica os valores digitados e muda o texto html 
     if (inpTrabSem == '') {
         inpTrab = 1500
     } else {
@@ -215,18 +194,50 @@ function muda() {
         inpDes = inpDesSem
         des.innerHTML = inpDesSem
     }
-    document.getElementById('relogio').style.background = '#5ef08ee0'
-    document.getElementById('relogio2').style.background = '#cecece'
+    eventos('trabAtivado')
 }
 
-// função que muda a formatação de horas para decimais
+// Função que muda a formatação de horas para decimais
 function altera(time) {
     const [minutos, segundos] = time.split(':')
     return Number((minutos * 60) + Number(segundos))
 }
 
-/* 
-O que melhorar:
-Refatorar as mudanças de cor do background
-Refatorar as mudanças de estado dos botoes e inputs
-*/
+// Função pra mudar estado dos inputs e a cor dos cronometros
+function eventos(caso) {
+
+    switch (caso) {
+
+        // Ativa botao pause, desativa o botao play e os inputs
+        case 'clicaPlay':
+            window.document.getElementById('inpTrab').disabled = true
+            window.document.getElementById('inpDes').disabled = true
+            bottocar.disabled = true
+            botpause.disabled = false
+            break;
+
+            // Desativa o botao pause, ativa o botao play e os inputs 
+        case 'clicaPause':
+            window.document.getElementById('inpTrab').disabled = false
+            window.document.getElementById('inpDes').disabled = false
+            bottocar.disabled = false
+            botpause.disabled = true
+            break;
+
+            // Inverte a cor dos cronometros
+        case 'trabAtivado':
+            document.getElementById('relogio').style.background = '#5ef08ee0'
+            document.getElementById('relogio2').style.background = '#cecece'
+            break;
+
+            // Inverte a cor dos cronometros
+        case 'desAtivado':
+            document.getElementById('relogio').style.background = '#cecece'
+            document.getElementById('relogio2').style.background = '#5ef08ee0'
+            break;
+
+        default:
+            console.log('Deu erro no eventos()')
+            break;
+    }
+}
