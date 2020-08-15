@@ -39,23 +39,38 @@
             <h2> Configurações</h2>
             <p>Para mudar o tempo de cada cronômetro, insira os valores abaixo.</p>
             <p>Ao alterar os valores o cronômetro será reiniciado.</p>
-            <form onchange="muda()">
+            <div>
+                <div>
+                    Trabalho
+                    <i class="fa fa-arrow-up" aria-hidden="true" onclick="flechas('setaCimaTrab')"></i>
+                    <input type="number" id="trabText" value="25">
+                    <i class="fa fa-arrow-down" aria-hidden="true" onclick="flechas('setaBaixoTrab')"></i>
+                </div>
+                <div>
+                    Descanso
+                    <i class="fa fa-arrow-up" aria-hidden="true" onclick="flechas('setaCimaDes')"></i>
+                    <span id="desText">tempo</span>
+                    <i class="fa fa-arrow-down" aria-hidden="true" onclick="flechas('setaBaixoDes')"></i>
+                </div>
+            </div>
+
+            <!-- <form onchange="muda()">
                 <p>
                     <label for="inpTrab">Trabalho</label>
-                    <input type="time" name="inpTrab" id="inpTrab" required>
+                    <input type="time" name="inpTrab" id="inpTrab" max="3600">
                 </p>
                 <p>
-                    <label for="inpDes">Descanso</label>
-                    <input type="time" name="inpDes" id="inpDes" required>
+                    <label for=" inpDes ">Descanso</label>
+                    <input type="time" name="inpDes" id="inpDes">
                 </p>
-            </form>
+            </form> -->
         </div>
     </section>
     <footer>
         por Fernando Sergio Luviza de Almeida
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js "></script>
 
 </body>
 
