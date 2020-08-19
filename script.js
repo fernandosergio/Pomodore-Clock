@@ -9,13 +9,19 @@ var des = window.document.getElementById('descanso')
 var bottocar = window.document.getElementById('botplay')
 var botpause = window.document.getElementById('botpausar')
 
-// Setas e span pra manipulação
+// Setas e divs pra manipulação
 var trabText = window.document.getElementById('trabText')
 var desText = window.document.getElementById('desText')
 let valorTrab = trabText.innerText
-let valorDes = Number(desText)
-console.log(valorDes)
-console.log(valorTrab)
+let valorDes = desText.innerText
+
+valorTrab = parseInt(valorTrab, 10)
+valorDes = parseInt(valorDes, 10)
+let trabMinutos = valorTrab
+let desMinutos = valorDes
+
+valorTrab = converter(valorTrab)
+valorDes = converter(valorDes)
 
 // Marcadores para reiniciar a função
 let conte = des
@@ -48,7 +54,7 @@ function conta(tempo, contador) {
             tempo-- // Diminui 1 
             tempofora = tempo // Define o tempo da variavel local para global
             conte = contador // Define o contador atual da varivel local para global
-            setTimeout('conta(tempofora, conte)', 1000) // Espera o tempo
+            setTimeout('conta(tempofora, conte)', 10) // Espera o tempo
 
         } else {
 
@@ -66,10 +72,10 @@ function conta(tempo, contador) {
 function trocaCont() {
 
     if (conte == trab) {
-        conta(inpDes, des) // Caso o contador esteja no trabalho e o valor de descanso foi definido
+        conta(valorDes, des) // Caso o contador esteja no trabalho e o valor de descanso foi definido
         eventos('desAtivado')
     } else if (conte == des) {
-        conta(inpTrab, trab) // Caso o contador esteja no descanso e o valor de descanso foi definido
+        conta(valorTrab, trab) // Caso o contador esteja no descanso e o valor de descanso foi definido
         eventos('trabAtivado')
     } else {
         console.log('Deu erro no trocaCont()') // Caso nenhum requisito foi atendido
@@ -81,6 +87,17 @@ function tocar() {
 
     // continua a função conta()
     verificador = true
+    if (conte == trab && tempofora != 5000) {
+        conta(tempofora, trab) // Caso o contador foi pausado e estava contando no trabalho
+    } else if (conte == des && tempofora != 5000) {
+        conta(tempofora, des) // Caso o contador foi pausado e estava no descanso
+    } else if (conte == trab) {
+        conta(valorDes, des) // Caso o contador esteja no trabalho e o valor de descanso foi definido
+        eventos('desAtivado')
+    } else if (conte == des) {
+        conta(valorTrab, trab) // Caso o contador esteja no descanso e o valor de descanso foi definido
+        eventos('trabAtivado')
+    }
     eventos('clicaPlay')
 }
 
@@ -97,9 +114,11 @@ function para() {
     // Redefine os valores 
     tempofora = 5000
     verificador = false
-    eventos('clicaPause')
+    conte = des
+    trab.innerHTML = trabText.innerText + ':00'
+    des.innerHTML = desText.innerText + ':00'
     eventos('trabAtivado')
-
+    eventos('clicaPause')
 }
 
 // Reinicia o contador
@@ -108,40 +127,47 @@ function reinicia() {
     // Redefine os valores e o html dos contadores
     verificador = false
     tempofora = 5000
+    conte = des
     trab.innerHTML = '25:00'
     des.innerHTML = '5:00'
-    trabText.innerHTML = 25
-    desText.innerHTML = 5
+    trabText.innerText = 25
+    desText.innerText = 5
+    valorTrab = 1500
+    valorDes = 300
     eventos('trabAtivado')
     eventos('clicaPause')
-    valorTrab = Number(trabText.innerText)
-    console.log(typeof(valorTrab))
 
-    console.log(valorDes)
-    console.log(valorTrab)
 }
 
 function flechas(caso) {
 
     switch (caso) {
         case 'setaCimaTrab':
-            console.log(trabText)
-            console.log(desText)
+            trabMinutos += 1
+            valorTrab += 60
+            trabText.innerText = trabMinutos
+            trab.innerHTML = trabMinutos + ':00'
             break
 
         case 'setaBaixoTrab':
-            console.log(trabText)
-            console.log(desText)
+            trabMinutos -= 1
+            valorTrab -= 60
+            trabText.innerText = trabMinutos
+            trab.innerHTML = trabMinutos + ':00'
             break
 
         case 'setaCimaDes':
-            console.log(trabText)
-            console.log(desText)
+            desMinutos += 1
+            valorDes += 60
+            desText.innerText = desMinutos
+            des.innerHTML = desMinutos + ':00'
             break
 
         case 'setaBaixoDes':
-            console.log(trabText)
-            console.log(desText)
+            desMinutos -= 1
+            valorDes -= 60
+            desText.innerText = desMinutos
+            des.innerHTML = desMinutos + ':00'
             break
 
         default:
@@ -152,6 +178,7 @@ function flechas(caso) {
 
 // Função pra mudar estado dos inputs e a cor dos cronometros
 function eventos(caso) {
+
 
     switch (caso) {
 
@@ -183,4 +210,8 @@ function eventos(caso) {
             console.log('Deu erro no eventos()')
             break;
     }
+}
+
+function converter(tempo) {
+    return Number(tempo * 60)
 }
