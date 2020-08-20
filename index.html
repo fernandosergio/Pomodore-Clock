@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Relógio de Pomodoro</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="animations.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
@@ -39,31 +40,26 @@
             <h2> Configurações</h2>
             <p>Para mudar o tempo de cada cronômetro, insira os valores abaixo.</p>
             <p>Ao alterar os valores o cronômetro será reiniciado.</p>
-            <div id="setas">
-                <div>
-                    Trabalho
-                    <i class="fa fa-arrow-up" aria-hidden="true" id="arrowUpTrab"></i>
-                    <div id="trabText">25</div>
-                    <i class="fa fa-arrow-down" aria-hidden="true" id="arrowDownTrab"></i>
-                </div>
-                <div>
-                    Descanso
-                    <i class="fa fa-arrow-up" aria-hidden="true" id="arrowUpDes"></i>
-                    <div id="desText">5</div>
-                    <i class="fa fa-arrow-down" aria-hidden="true" id="arrowDownDes"></i>
+            <div id="relativo">
+                <div id="setas">
+                    <div class="trabCampo">
+                        Trabalho
+                        <div class="trabCampoSetas">
+                            <i class="fa fa-arrow-up" aria-hidden="true" id="arrowUpTrab"></i>
+                            <div id="trabText">25</div>
+                            <i class="fa fa-arrow-down" aria-hidden="true" id="arrowDownTrab"></i>
+                        </div>
+                    </div>
+                    <div class="desCampo">
+                        Descanso
+                        <div class="desCampoSetas">
+                            <i class="fa fa-arrow-up" aria-hidden="true" id="arrowUpDes"></i>
+                            <div id="desText">5</div>
+                            <i class="fa fa-arrow-down" aria-hidden="true" id="arrowDownDes"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <!-- <form onchange="muda()">
-                <p>
-                    <label for="inpTrab">Trabalho</label>
-                    <input type="time" name="inpTrab" id="inpTrab" max="3600">
-                </p>
-                <p>
-                    <label for=" inpDes ">Descanso</label>
-                    <input type="time" name="inpDes" id="inpDes">
-                </p>
-            </form> -->
         </div>
     </section>
     <footer>

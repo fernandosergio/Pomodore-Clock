@@ -234,12 +234,12 @@ function eventos(caso) {
 
             // Ativa as setas para aumentar ou diminuir os valores
         case 'ouvidoresAtivados':
-            setas.hidden = false
+            setas.style.display = ""
             break;
 
             // Desativas as setas dos valores
         case 'ouvidoresDesativados':
-            setas.hidden = true
+            setas.style.display = "none"
             break;
 
         default:
