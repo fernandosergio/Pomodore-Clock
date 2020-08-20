@@ -1,5 +1,5 @@
 // Arquivos utilizados
-var audio = new Audio('done-for-you.mp3')
+const audio = new Audio('done-for-you.mp3')
 
 // Cronômetros
 var trab = window.document.getElementById('trabalho')
@@ -10,8 +10,8 @@ var bottocar = window.document.getElementById('botplay')
 var botpause = window.document.getElementById('botpausar')
 
 // Setas e divs pra manipulação
-var trabText = window.document.getElementById('trabText')
-var desText = window.document.getElementById('desText')
+const trabText = window.document.getElementById('trabText')
+const desText = window.document.getElementById('desText')
 let valorTrab = trabText.innerText
 let valorDes = desText.innerText
 
@@ -28,12 +28,22 @@ let conte = des
 let tempofora = 5000
 let verificador = false
 
+let setas = window.document.querySelector('#setas')
+let arrowUpTrab = window.document.querySelector('#arrowUpTrab')
+let arrowDownTrab = window.document.querySelector('#arrowDownTrab')
+let arrowUpDes = window.document.querySelector('#arrowUpDes')
+let arrowDownDes = window.document.querySelector('#arrowDownDes')
+arrowUpTrab.addEventListener('click', () => { flechas('setaCimaTrab') })
+arrowDownTrab.addEventListener('click', () => { flechas('setaBaixoTrab') })
+arrowUpDes.addEventListener('click', () => { flechas('setaCimaDes') })
+arrowDownDes.addEventListener('click', () => { flechas('setaBaixoDes') })
+eventos('ouvidoresAtivados')
+
 // Função que conta o tempo dos cronometros
 function conta(tempo, contador) {
 
     // "Iniciador" da função
     if (verificador) {
-
         // Verficia se tem tempo
         if (tempo >= 0) {
             // Divide o tempo entre minutos e segundos
@@ -62,9 +72,8 @@ function conta(tempo, contador) {
             audio.play()
             trocaCont()
         }
-    } else {
-        console.log('Deu erro no conta() ou foi pausado') // Caso nenhum requisito foi atendido
     }
+
 }
 
 
@@ -87,7 +96,11 @@ function tocar() {
 
     // continua a função conta()
     verificador = true
-    if (conte == trab && tempofora != 5000) {
+    if (conte == trab && tempofora == 8000) {
+        conta(valorTrab, trab)
+    } else if (conte == des && tempofora == 8000) {
+        conta(valorDes, des)
+    } else if (conte == trab && tempofora != 5000) {
         conta(tempofora, trab) // Caso o contador foi pausado e estava contando no trabalho
     } else if (conte == des && tempofora != 5000) {
         conta(tempofora, des) // Caso o contador foi pausado e estava no descanso
@@ -97,8 +110,13 @@ function tocar() {
     } else if (conte == des) {
         conta(valorTrab, trab) // Caso o contador esteja no descanso e o valor de descanso foi definido
         eventos('trabAtivado')
+
     }
     eventos('clicaPlay')
+    eventos('ouvidoresDesativados')
+
+
+
 }
 
 // Função do botão pause
@@ -106,6 +124,7 @@ function pausar() {
 
     verificador = false
     eventos('clicaPause')
+    eventos('ouvidoresAtivados')
 }
 
 // Função do botão stop
@@ -136,11 +155,12 @@ function reinicia() {
     valorDes = 300
     eventos('trabAtivado')
     eventos('clicaPause')
-
+    eventos('ouvidoresAtivados')
 }
 
 function flechas(caso) {
 
+    tempofora = 8000
     switch (caso) {
         case 'setaCimaTrab':
             trabMinutos += 1
@@ -179,7 +199,6 @@ function flechas(caso) {
 // Função pra mudar estado dos inputs e a cor dos cronometros
 function eventos(caso) {
 
-
     switch (caso) {
 
         // Ativa botao pause, desativa o botao play e os inputs
@@ -192,6 +211,7 @@ function eventos(caso) {
         case 'clicaPause':
             bottocar.disabled = false
             botpause.disabled = true
+
             break;
 
             // Inverte a cor dos cronometros
@@ -204,6 +224,14 @@ function eventos(caso) {
         case 'desAtivado':
             document.getElementById('relogio').style.background = '#cecece'
             document.getElementById('relogio2').style.background = '#5ef08ee0'
+            break;
+
+        case 'ouvidoresAtivados':
+            setas.hidden = false
+            break;
+
+        case 'ouvidoresDesativados':
+            setas.hidden = true
             break;
 
         default:
