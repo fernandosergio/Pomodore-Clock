@@ -28,6 +28,7 @@ let conte = des
 let tempofora = 5000
 let verificador = false
 
+// Setas e event listners para manipulação
 let setas = window.document.querySelector('#setas')
 let arrowUpTrab = window.document.querySelector('#arrowUpTrab')
 let arrowDownTrab = window.document.querySelector('#arrowDownTrab')
@@ -47,8 +48,8 @@ function conta(tempo, contador) {
         // Verficia se tem tempo
         if (tempo >= 0) {
             // Divide o tempo entre minutos e segundos
-            var min = parseInt(tempo / 60)
-            var seg = tempo % 60
+            let min = parseInt(tempo / 60)
+            let seg = tempo % 60
 
             // Se for menor do que 10 adiciona um 0 antes ex 09
             if (min < 10) {
@@ -59,7 +60,7 @@ function conta(tempo, contador) {
             }
 
             // Formata o tempo
-            tempoimprimivel = min + ":" + seg
+            let tempoimprimivel = min + ":" + seg
             contador.innerHTML = tempoimprimivel
             tempo-- // Diminui 1 
             tempofora = tempo // Define o tempo da variavel local para global
@@ -97,9 +98,9 @@ function tocar() {
     // continua a função conta()
     verificador = true
     if (conte == trab && tempofora == 8000) {
-        conta(valorTrab, trab)
+        conta(valorTrab, trab) // caso o tempo foi alterado nas setas
     } else if (conte == des && tempofora == 8000) {
-        conta(valorDes, des)
+        conta(valorDes, des) // caso o tempo foi alterado nas setas
     } else if (conte == trab && tempofora != 5000) {
         conta(tempofora, trab) // Caso o contador foi pausado e estava contando no trabalho
     } else if (conte == des && tempofora != 5000) {
@@ -158,10 +159,12 @@ function reinicia() {
     eventos('ouvidoresAtivados')
 }
 
+// Funcoes que manipulam as setas
 function flechas(caso) {
 
     tempofora = 8000
     switch (caso) {
+        // Aumentar o valor de trabalho
         case 'setaCimaTrab':
             trabMinutos += 1
             valorTrab += 60
@@ -169,6 +172,7 @@ function flechas(caso) {
             trab.innerHTML = trabMinutos + ':00'
             break
 
+            // Diminuir o valor de trabalho
         case 'setaBaixoTrab':
             trabMinutos -= 1
             valorTrab -= 60
@@ -176,6 +180,7 @@ function flechas(caso) {
             trab.innerHTML = trabMinutos + ':00'
             break
 
+            // Aumentar o valor de descanso
         case 'setaCimaDes':
             desMinutos += 1
             valorDes += 60
@@ -183,6 +188,7 @@ function flechas(caso) {
             des.innerHTML = desMinutos + ':00'
             break
 
+            // Diminuir o valor de descanso
         case 'setaBaixoDes':
             desMinutos -= 1
             valorDes -= 60
@@ -226,10 +232,12 @@ function eventos(caso) {
             document.getElementById('relogio2').style.background = '#5ef08ee0'
             break;
 
+            // Ativa as setas para aumentar ou diminuir os valores
         case 'ouvidoresAtivados':
             setas.hidden = false
             break;
 
+            // Desativas as setas dos valores
         case 'ouvidoresDesativados':
             setas.hidden = true
             break;
@@ -240,6 +248,7 @@ function eventos(caso) {
     }
 }
 
+// Converte minutos para segundos
 function converter(tempo) {
     return Number(tempo * 60)
 }
