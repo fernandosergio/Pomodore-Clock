@@ -11,25 +11,24 @@ div#setas {
     justify-content: space-evenly;
     animation-name: apareca;
     animation-duration: 1s;
-    animation-direction: alternate;
-    animation-timing-function: ease-out;
 }
 
 @keyframes apareca {
     from {
-        display: none;
         opacity: 0;
         position: absolute;
         width: 100%;
         height: 0;
         top: 0;
         right: 0;
+        transition: ease-out;
     }
     50% {
         opacity: 0;
     }
     to {
         height: 6.8rem;
+        opacity: 1;
     }
 }
 
