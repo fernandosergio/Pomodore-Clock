@@ -65,7 +65,7 @@ function conta(tempo, contador) {
             tempo-- // Diminui 1 
             tempofora = tempo // Define o tempo da variavel local para global
             conte = contador // Define o contador atual da varivel local para global
-            setTimeout('conta(tempofora, conte)', 10) // Espera o tempo
+            setTimeout('conta(tempofora, conte)', 1000) // Espera o tempo
 
         } else {
 
