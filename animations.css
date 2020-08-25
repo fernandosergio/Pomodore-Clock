@@ -6,30 +6,21 @@ div#relativo {
     position: relative;
 }
 
-div#setas {
+div.setas {
     display: flex;
     justify-content: space-evenly;
-    animation-name: apareca;
-    animation-duration: 1s;
 }
 
-@keyframes apareca {
-    from {
-        opacity: 0;
-        position: absolute;
-        width: 100%;
-        height: 0;
-        top: 0;
-        right: 0;
-        transition: ease-out;
-    }
-    50% {
-        opacity: 0;
-    }
-    to {
-        height: 6.8rem;
-        opacity: 1;
-    }
+.setas {
+    height: 6.8rem;
+    transition: all 1s ease-out;
+}
+
+.setas-hidden {
+    height: 0;
+    opacity: 0;
+    background-color: cadetblue;
+    transition: all 1s ease-out;
 }
 
 div.trabCampo,
@@ -44,7 +35,11 @@ div.desCampoSetas {
     padding: 0.4rem;
 }
 
-div#setas i {
+.idesaparecido {
+    cursor: initial !important;
+}
+
+div.setas i {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -56,7 +51,7 @@ div#setas i {
     transition: .2s;
 }
 
-div#setas i:hover {
+div.setas i:hover {
     background-color: #933CCC;
 }
 
