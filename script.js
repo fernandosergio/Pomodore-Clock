@@ -29,16 +29,16 @@ let tempofora = 5000
 let verificador = false
 
 // Setas e event listners para manipulação
-let setas = window.document.querySelector('#setas')
+let setas = window.document.querySelector('.setas')
 let arrowUpTrab = window.document.querySelector('#arrowUpTrab')
 let arrowDownTrab = window.document.querySelector('#arrowDownTrab')
 let arrowUpDes = window.document.querySelector('#arrowUpDes')
 let arrowDownDes = window.document.querySelector('#arrowDownDes')
-arrowUpTrab.addEventListener('click', () => { flechas('setaCimaTrab') })
-arrowDownTrab.addEventListener('click', () => { flechas('setaBaixoTrab') })
-arrowUpDes.addEventListener('click', () => { flechas('setaCimaDes') })
-arrowDownDes.addEventListener('click', () => { flechas('setaBaixoDes') })
-eventos('ouvidoresAtivados')
+
+arrowUpTrab.addEventListener('click', funcSetaCimaTrab)
+arrowDownTrab.addEventListener('click', funcSetaBaixoTrab)
+arrowUpDes.addEventListener('click', funcSetaCimaDes)
+arrowDownDes.addEventListener('click', funcSetaBaixoDes)
 
 // Função que conta o tempo dos cronometros
 function conta(tempo, contador) {
@@ -65,7 +65,7 @@ function conta(tempo, contador) {
             tempo-- // Diminui 1 
             tempofora = tempo // Define o tempo da variavel local para global
             conte = contador // Define o contador atual da varivel local para global
-            setTimeout('conta(tempofora, conte)', 10) // Espera o tempo
+            setTimeout('conta(tempofora, conte)', 1000) // Espera o tempo
 
         } else {
 
@@ -76,7 +76,6 @@ function conta(tempo, contador) {
     }
 
 }
-
 
 // Função que verifica os valores, troca os contadores e os valores
 function trocaCont() {
@@ -232,15 +231,33 @@ function eventos(caso) {
             document.getElementById('relogio2').style.background = '#5ef08ee0'
             break;
 
-            // Ativa as setas para aumentar ou diminuir os valores
+            // Ativa as setas para aumentar ou diminuir os valores e os eventListeners
         case 'ouvidoresAtivados':
-            setas.style.display = ''
-            break;
+            setas.classList.remove('setas-hidden')
+            setas.classList.remove('setas-hidden')
+            arrowUpTrab.classList.remove('idesaparecido')
+            arrowDownTrab.classList.remove('idesaparecido')
+            arrowUpDes.classList.remove('idesaparecido')
+            arrowDownDes.classList.remove('idesaparecido')
+            arrowUpTrab.addEventListener('click', funcSetaCimaTrab)
+            arrowDownTrab.addEventListener('click', funcSetaBaixoTrab)
+            arrowUpDes.addEventListener('click', funcSetaCimaDes)
+            arrowDownDes.addEventListener('click', funcSetaBaixoDes)
 
-            // Desativas as setas dos valores
+            break
+
+            // Desativas as setas dos valores e os eventListeners
         case 'ouvidoresDesativados':
-            setas.style.display = 'none'
-            break;
+            setas.classList.add('setas-hidden')
+            arrowUpTrab.classList.add('idesaparecido')
+            arrowDownTrab.classList.add('idesaparecido')
+            arrowUpDes.classList.add('idesaparecido')
+            arrowDownDes.classList.add('idesaparecido')
+            arrowUpTrab.removeEventListener('click', funcSetaCimaTrab)
+            arrowDownTrab.removeEventListener('click', funcSetaBaixoTrab)
+            arrowUpDes.removeEventListener('click', funcSetaCimaDes)
+            arrowDownDes.removeEventListener('click', funcSetaBaixoDes)
+            break
 
         default:
             console.log('Deu erro no eventos()')
@@ -251,4 +268,21 @@ function eventos(caso) {
 // Converte minutos para segundos
 function converter(tempo) {
     return Number(tempo * 60)
+}
+
+// Variaveis para adicionar/remover eventListeners
+var funcSetaCimaTrab = function() {
+    flechas('setaCimaTrab')
+}
+
+var funcSetaBaixoTrab = function() {
+    flechas('setaBaixoTrab')
+}
+
+var funcSetaCimaDes = function() {
+    flechas('setaCimaDes')
+}
+
+var funcSetaBaixoDes = function() {
+    flechas('setaBaixoDes')
 }
