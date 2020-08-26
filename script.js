@@ -28,6 +28,12 @@ let conte = des
 let tempofora = 5000
 let verificador = false
 
+// Variaveis para adicionar/remover eventListeners
+var funcSetaCimaTrab = function() { flechas('setaCimaTrab') }
+var funcSetaBaixoTrab = function() { flechas('setaBaixoTrab') }
+var funcSetaCimaDes = function() { flechas('setaCimaDes') }
+var funcSetaBaixoDes = function() { flechas('setaBaixoDes') }
+
 // Setas e event listners para manipulação
 let setas = window.document.querySelector('.setas')
 let arrowUpTrab = window.document.querySelector('#arrowUpTrab')
@@ -268,21 +274,4 @@ function eventos(caso) {
 // Converte minutos para segundos
 function converter(tempo) {
     return Number(tempo * 60)
-}
-
-// Variaveis para adicionar/remover eventListeners
-var funcSetaCimaTrab = function() {
-    flechas('setaCimaTrab')
-}
-
-var funcSetaBaixoTrab = function() {
-    flechas('setaBaixoTrab')
-}
-
-var funcSetaCimaDes = function() {
-    flechas('setaCimaDes')
-}
-
-var funcSetaBaixoDes = function() {
-    flechas('setaBaixoDes')
 }
