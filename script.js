@@ -35,10 +35,10 @@ let arrowDownTrab = window.document.querySelector('#arrowDownTrab')
 let arrowUpDes = window.document.querySelector('#arrowUpDes')
 let arrowDownDes = window.document.querySelector('#arrowDownDes')
 
-arrowUpTrab.addEventListener('click', () => { flechas('setaCimaTrab') })
-arrowDownTrab.addEventListener('click', () => { flechas('setaBaixoTrab') })
-arrowUpDes.addEventListener('click', () => { flechas('setaCimaDes') })
-arrowDownDes.addEventListener('click', () => { flechas('setaBaixoDes') })
+arrowUpTrab.addEventListener('click', funcSetaCimaTrab)
+arrowDownTrab.addEventListener('click', funcSetaBaixoTrab)
+arrowUpDes.addEventListener('click', funcSetaCimaDes)
+arrowDownDes.addEventListener('click', funcSetaBaixoDes)
 
 // Função que conta o tempo dos cronometros
 function conta(tempo, contador) {
@@ -76,7 +76,6 @@ function conta(tempo, contador) {
     }
 
 }
-
 
 // Função que verifica os valores, troca os contadores e os valores
 function trocaCont() {
@@ -232,28 +231,33 @@ function eventos(caso) {
             document.getElementById('relogio2').style.background = '#5ef08ee0'
             break;
 
-            // Ativa as setas para aumentar ou diminuir os valores
+            // Ativa as setas para aumentar ou diminuir os valores e os eventListeners
         case 'ouvidoresAtivados':
-            //setas.style.display = ''
             setas.classList.remove('setas-hidden')
             setas.classList.remove('setas-hidden')
             arrowUpTrab.classList.remove('idesaparecido')
             arrowDownTrab.classList.remove('idesaparecido')
             arrowUpDes.classList.remove('idesaparecido')
             arrowDownDes.classList.remove('idesaparecido')
+            arrowUpTrab.addEventListener('click', funcSetaCimaTrab)
+            arrowDownTrab.addEventListener('click', funcSetaBaixoTrab)
+            arrowUpDes.addEventListener('click', funcSetaCimaDes)
+            arrowDownDes.addEventListener('click', funcSetaBaixoDes)
 
             break
 
-            // Desativas as setas dos valores
+            // Desativas as setas dos valores e os eventListeners
         case 'ouvidoresDesativados':
             setas.classList.add('setas-hidden')
             arrowUpTrab.classList.add('idesaparecido')
             arrowDownTrab.classList.add('idesaparecido')
             arrowUpDes.classList.add('idesaparecido')
             arrowDownDes.classList.add('idesaparecido')
-
-
-            break;
+            arrowUpTrab.removeEventListener('click', funcSetaCimaTrab)
+            arrowDownTrab.removeEventListener('click', funcSetaBaixoTrab)
+            arrowUpDes.removeEventListener('click', funcSetaCimaDes)
+            arrowDownDes.removeEventListener('click', funcSetaBaixoDes)
+            break
 
         default:
             console.log('Deu erro no eventos()')
@@ -264,4 +268,21 @@ function eventos(caso) {
 // Converte minutos para segundos
 function converter(tempo) {
     return Number(tempo * 60)
+}
+
+// Variaveis para adicionar/remover eventListeners
+var funcSetaCimaTrab = function() {
+    flechas('setaCimaTrab')
+}
+
+var funcSetaBaixoTrab = function() {
+    flechas('setaBaixoTrab')
+}
+
+var funcSetaCimaDes = function() {
+    flechas('setaCimaDes')
+}
+
+var funcSetaBaixoDes = function() {
+    flechas('setaBaixoDes')
 }
