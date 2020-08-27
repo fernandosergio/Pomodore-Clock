@@ -67,7 +67,7 @@ button:disabled {
 }
 
 button:disabled:hover {
-    background-color: #B84BFF;
+    background-color: #b74bffab;
     cursor: initial;
 }
 
