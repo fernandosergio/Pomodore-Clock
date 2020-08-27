@@ -121,8 +121,6 @@ function tocar() {
     eventos('clicaPlay')
     eventos('ouvidoresDesativados')
 
-
-
 }
 
 // Função do botão pause
@@ -144,6 +142,7 @@ function para() {
     des.innerHTML = desText.innerText + ':00'
     eventos('trabAtivado')
     eventos('clicaPause')
+    eventos('ouvidoresAtivados')
 }
 
 // Reinicia o contador
@@ -168,6 +167,7 @@ function reinicia() {
 function flechas(caso) {
 
     tempofora = 8000
+    conte = trab
     switch (caso) {
         // Aumentar o valor de trabalho
         case 'setaCimaTrab':
@@ -222,7 +222,6 @@ function eventos(caso) {
         case 'clicaPause':
             bottocar.disabled = false
             botpause.disabled = true
-
             break;
 
             // Inverte a cor dos cronometros
@@ -249,7 +248,6 @@ function eventos(caso) {
             arrowDownTrab.addEventListener('click', funcSetaBaixoTrab)
             arrowUpDes.addEventListener('click', funcSetaCimaDes)
             arrowDownDes.addEventListener('click', funcSetaBaixoDes)
-
             break
 
             // Desativas as setas dos valores e os eventListeners
