@@ -46,27 +46,31 @@ div.setas i {
     border-radius: 3px;
     width: 2.5rem;
     height: 2rem;
-    background-color: #5C257F;
+    background-color: #933CCC;
     cursor: pointer;
     transition: .2s;
 }
 
 div.setas i:hover {
-    background-color: #933CCC;
+    background-color: #5C257F;
 }
 
 button {
     cursor: pointer;
-    background-color: #933CCC;
+    background-color: #B84BFF;
     transition-duration: .2s;
     border: none;
 }
 
+button:disabled {
+    background-color: #b74bffab;
+}
+
 button:disabled:hover {
-    background-color: #933CCC;
+    background-color: #B84BFF;
     cursor: initial;
 }
 
 button:hover {
-    background-color: #B84BFF;
+    background-color: #933CCC;
 }
